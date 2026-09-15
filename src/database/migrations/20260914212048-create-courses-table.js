@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.TEXT,
       },
-      thumbnails_url: {
+      thumbnail_url: {
         type: Sequelize.DataTypes.STRING,
       },
       featured: {
