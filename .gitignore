@@ -1,5 +1,7 @@
 # Dependências
 node_modules/
+#pasta de vídeos
+uploads/*
 
 # Configurações de IDEs e Editores
 .vscode/
