@@ -4,17 +4,17 @@ import { ResourceOptions, FeatureType } from "adminjs";
 
 export const courseResourceOptions: ResourceOptions = {
   navigation: "Catálogo",
-  editProperties: ["name", "synopsis", "uploadThumbnail", "featured", "categoryId"],
-  filterProperties: ["name", "synopsis", "featured", "categoryId", "createdAt", "updatedAt"],
-  listProperties: ["id", "name", "featured", "categoryId"],
-  showProperties: ["id", "name", "synopsis", "featured", "thumbnailUrl", "categoryId", "createdAt", "updatedAt"],
+  editProperties: ["name", "synopsis", "uploadThumbnail", "categoryId", "featured"],
+  filterProperties: ["name",  "categoryId", "createdAt", "updatedAt"],
+  listProperties: ["id", "name",  "categoryId", "featured"],
+  showProperties: ["id", "name", "synopsis",  "thumbnailUrl", "categoryId", "featured","createdAt", "updatedAt"],
 };
 
 export const courseResourceFeatures: FeatureType[] = [
   uploadFileFeature({
     provider: {
       local: {
-        bucket: path.join(__dirname, "public"),
+        bucket: path.join(__dirname, "../../../public"),
       },
     },
     properties: {
