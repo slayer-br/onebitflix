@@ -10,4 +10,5 @@ export const sequelize = new Sequelize({
   define: {
     underscored: true,
   },
+  logging: (msg) => console.log(msg), 
 });
