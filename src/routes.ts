@@ -2,7 +2,7 @@ import express from "express";
 import { categoriesController } from "./controllers/categoriesController";
 import { coursesController } from "./controllers/coursesController";
 import { episodesController } from "./controllers/episodesController";
-import {favoriteController} from "./controllers/favoriteController";
+import {favoritesController} from "./controllers/favoritesController";
 import { authController } from "./controllers/authController";
 import { ensureAuth, ensureAuthViaQuery } from "./middlewares/auth";
 
@@ -23,5 +23,5 @@ router.get("/courses/:id", ensureAuth,coursesController.show);
 
 router.get("/episodes/stream",ensureAuthViaQuery, episodesController.stream);
 
-router.post('/favorites', ensureAuth, favoriteController.save)
+router.post('/favorites', ensureAuth, favoritesController.save)
 export { router };
