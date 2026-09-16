@@ -1,23 +1,36 @@
 // src/controllers/categories-controller.ts
 
-import { Request, Response } from 'express'
-import { getPaginationParams } from '../helpers/getPaginationParams'
-import { categoryService } from '../services/categoryService'
+import { Request, Response } from "express";
+import { getPaginationParams } from "../helpers/getPaginationParams";
+import { categoryService } from "../services/categoryService";
 
 const categoriesController = {
   index: async (req: Request, res: Response) => {
-    const [page, perPage] = getPaginationParams(req.query)
+    const [page, perPage] = getPaginationParams(req.query);
 
     try {
-      const paginatedCategories = await categoryService.findAllPaginated(page, perPage)
+      const paginatedCategories = await categoryService.findAllPaginated(page, perPage);
 
-      return res.json(paginatedCategories)
+      return res.json(paginatedCategories);
     } catch (err) {
       if (err instanceof Error) {
-        return res.status(400).json({ message: err.message })
+        return res.status(400).json({ message: err.message });
       }
     }
-  }
-}
+  },
 
-export { categoriesController }
+  show: async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+      const category = await categoryService.findByWithCourses(id);
+      return res.json(category);
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(400).json({ message: err.message });
+      }
+    }
+  },
+};
+
+export { categoriesController };
