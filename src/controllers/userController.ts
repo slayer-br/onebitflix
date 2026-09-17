@@ -45,9 +45,7 @@ export const usersController = {
 
     try {
       user.checkPassword(currentPassword, async (err, isSame) => {
-        if (err) {
-          return res.status(400).json({ message: err.message });
-        }
+        if (err) return res.status(400).json({ message: err.message });
 
         if (!isSame) {
           return res.status(400).json({ message: "Senha incorreta" });
