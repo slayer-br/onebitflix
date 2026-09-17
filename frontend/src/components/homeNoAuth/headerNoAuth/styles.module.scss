@@ -5,8 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 0px;
-  gap: 30px;
+  padding: 6px 12px;
+  gap: 20px;
+  
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+  }
 }
 
 .imgCta {
