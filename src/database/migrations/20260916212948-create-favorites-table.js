@@ -1,5 +1,3 @@
-// src/database/migration/XXXXXXXXXXXXXX-create-favorites-table.js
-
 'use strict';
 
 module.exports = {
