@@ -1,91 +1,79 @@
-import { User } from '../models'
-import { EpisodeInstance } from '../models/Episode';
-import { UserCreationAttributes } from '../models/User';
-
+import { User } from "../models";
+import { EpisodeInstance } from "../models/Episode";
+import { UserCreationAttributes } from "../models/User";
 
 function filterLastEpisodesByCourse(episodes: EpisodeInstance[]) {
-  const coursesOnList: number[] = []
+  const coursesOnList: number[] = [];
 
   const lastEpisodes = episodes.reduce((currentList, episode) => {
     if (!coursesOnList.includes(episode.courseId)) {
-      coursesOnList.push(episode.courseId)
-      currentList.push(episode)
-      return currentList
+      coursesOnList.push(episode.courseId);
+      currentList.push(episode);
+      return currentList;
     }
 
-    const episodeFromSameCourse = currentList.find(ep => ep.courseId === episode.courseId)
+    const episodeFromSameCourse = currentList.find((ep) => ep.courseId === episode.courseId);
 
-    if (episodeFromSameCourse!.order > episode.order) return currentList
+    if (episodeFromSameCourse!.order > episode.order) return currentList;
 
-    const listWithoutEpisodeFromSameCourse = currentList.filter(ep => ep.courseId !== episode.courseId)
-    listWithoutEpisodeFromSameCourse.push(episode)
+    const listWithoutEpisodeFromSameCourse = currentList.filter((ep) => ep.courseId !== episode.courseId);
+    listWithoutEpisodeFromSameCourse.push(episode);
 
-    return listWithoutEpisodeFromSameCourse
-  }, [] as EpisodeInstance[])
+    return listWithoutEpisodeFromSameCourse;
+  }, [] as EpisodeInstance[]);
 
-  return lastEpisodes
+  return lastEpisodes;
 }
 
 export const userService = {
   findByEmail: async (email: string) => {
     const user = await User.findOne({
-      attributes: [
-        'id',
-        ['first_name', 'firstName'],
-        ['last_name', 'lastName'],
-        'phone',
-        'birth',
-        'email',
-        'password'
-      ],
-      where: { email }
-    })
-    return user
+      attributes: ["id", ["first_name", "firstName"], ["last_name", "lastName"], "phone", "birth", "email", "password"],
+      where: { email },
+    });
+    return user;
   },
 
   create: async (attributes: UserCreationAttributes) => {
-    const user = await User.create(attributes)
-    return user
+    const user = await User.create(attributes);
+    return user;
   },
 
   getKeepWatchingList: async (id: number) => {
     const userWithWatchingEpisodes = await User.findByPk(id, {
       include: {
-        association: 'Episodes',
+        association: "Episodes",
         attributes: [
-          'id',
-          'name',
-          'synopsis',
-          'order',
-          ['video_url', 'videoUrl'],
-          ['seconds_long', 'secondsLong'],
-          ['course_id', 'courseId']
+          "id",
+          "name",
+          "synopsis",
+          "order",
+          ["video_url", "videoUrl"],
+          ["seconds_long", "secondsLong"],
+          ["course_id", "courseId"],
         ],
-        include: [{
-          association: 'Course',
-          attributes: [
-            'id',
-            'name',
-            'synopsis',
-            ['thumbnail_url', 'thumbnailUrl']
-          ],
-          as: 'course'
-        }],
+        include: [
+          {
+            association: "Course",
+            attributes: ["id", "name", "synopsis", ["thumbnail_url", "thumbnailUrl"]],
+            as: "course",
+          },
+        ],
         through: {
-          as: 'watchTime',
-          attributes: [
-            'seconds',
-            ['updated_at', 'updatedAt']
-          ]
-        }
-      }
-    })
+          as: "watchTime",
+          attributes: ["seconds", ["updated_at", "updatedAt"]],
+        },
+      },
+    });
 
-    if (!userWithWatchingEpisodes) throw new Error('Usuário não encontrado.')
+    if (!userWithWatchingEpisodes) throw new Error("Usuário não encontrado.");
 
-    const keepWatchingList = filterLastEpisodesByCourse(userWithWatchingEpisodes.Episodes!)
-    // @ts-ignore
-    keepWatchingList.sort((episodeOne, episodeTwo) => episodeOne.watchTime.updatedAt < episodeTwo.watchTime.updatedAt ? 1 : -1)
-    return keepWatchingList
-  }
-}
+    const keepWatchingList = filterLastEpisodesByCourse(userWithWatchingEpisodes.Episodes!);
+
+    keepWatchingList.sort((episodeOne, episodeTwo) =>
+      // @ts-ignore
+      episodeOne.watchTime.updatedAt < episodeTwo.watchTime.updatedAt ? 1 : -1,
+    );
+    return keepWatchingList;
+  },
+};
