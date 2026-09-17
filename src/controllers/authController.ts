@@ -38,7 +38,7 @@ export const authController = {
       const user = await userService.findByEmail(email);
 
       if (!user) {
-        return res.status(401).json({ message: "E-mail não registrado" });
+        return res.status(401).json({ message: "E-mail não registrado." });
       }
 
       user.checkPassword(password, (err, isSame) => {
@@ -47,7 +47,7 @@ export const authController = {
         }
 
         if (!isSame) {
-          return res.status(401).json({ message: "Senha incorreta" });
+          return res.status(401).json({ message: "Senha incorreta." });
         }
 
         const payload = {

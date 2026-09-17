@@ -48,7 +48,7 @@ export const usersController = {
         if (err) return res.status(400).json({ message: err.message });
 
         if (!isSame) {
-          return res.status(400).json({ message: "Senha incorreta" });
+          return res.status(400).json({ message: "Senha incorreta." });
         }
 
         await userService.updatePassword(user.id, newPassword);
