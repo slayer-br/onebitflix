@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 const CardsSection = function () {
   return (
     <>
-      <p className={styles.sectionTitle}>o que vc vai acesar</p>
+      <p className={styles.sectionTitle}>o que vc vai acessar</p>
       <Container className="d-flex flex-wrap justify-content-center gap-4 pb-5">
         <div className={styles.card1}>
           <p className={styles.cardTitle}>front-end</p>
