@@ -1,6 +1,6 @@
 import { CourseType } from "../../../services/courseService";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/dist/css/splide.min.css";
+import "@splidejs/react-splide/css";
 import SlideCard from "../SlideCard";
 
 interface props {
@@ -18,7 +18,7 @@ const SlideComponent = function ({ course }: props) {
             pagination: false,
           }}
         >
-          {course?.map(() => (
+          {course?.map((course) => (
             <SplideSlide key={course.id}>
               <SlideCard course={course} />
             </SplideSlide>

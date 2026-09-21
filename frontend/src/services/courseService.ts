@@ -21,7 +21,7 @@ export type CourseType = {
 const courseService = {
     getNewestCourses: async () => {
         const res = await api.get("/courses/newest").catch((error) => {
-            console.log(error.response.data.message);
+            console.log(error.response?.data?.message || error.message);
 
             return error.response;
         });
