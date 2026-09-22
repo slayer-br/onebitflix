@@ -14,6 +14,12 @@ const Login = function () {
   const [toastMessage, setToastMessage] = useState("");
 
   useEffect(() => {
+    if (sessionStorage.getItem("onebitflix-token")) {
+      router.push("/home");
+    }
+  }, []);
+
+  useEffect(() => {
     if (router.query.registred === "true") {
       setToastColor("bg-success");
       setToastIsOpen(true);
