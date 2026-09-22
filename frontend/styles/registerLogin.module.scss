@@ -6,7 +6,13 @@
 .formTitle {
   font-size: 40px;
   font-weight: bold;
+  text-align: center;
   margin-bottom: 40px;
+}
+
+.formSubTitle {
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .form {
@@ -72,5 +78,11 @@
 @media (max-width: 575px) {
   .form {
     padding: 50px 10px;
+  }
+}
+
+@media (max-width: 423px) {
+  .formTitle {
+    font-size: 24px;
   }
 }
