@@ -3,7 +3,7 @@ import styles from "../styles/registerLogin.module.scss";
 import Head from "next/head";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import Footer from "@/components/common/footer";
-import { FormEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import authService from "@/services/authService";
 import { useRouter } from "next/router";
 import ToastComponent from "@/components/common/toast";
@@ -13,7 +13,7 @@ const Register = function () {
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
-  const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
+  const handleRegister = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
