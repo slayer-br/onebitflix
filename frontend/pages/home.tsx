@@ -2,8 +2,9 @@ import Footer from "@/components/common/footer";
 import FeaturedSection from "@/components/homeAuth/featuredSection";
 import Head from "next/head";
 import NewestCategory from "@/components/homeAuth/newestCategory";
-import FavoritesCourses from "@/components/homeAuth/favoriteCtegory";
+import FavoritesCourses from "@/components/homeAuth/favoriteCategory";
 import FeaturedCategory from "@/components/homeAuth/featuredCategory";
+import ListCategories from "@/components/homeAuth/listCategories";
 const HomeAuth = function () {
   return (
     <>
@@ -16,6 +17,7 @@ const HomeAuth = function () {
         <NewestCategory />
         <FavoritesCourses />
         <FeaturedCategory />
+        <ListCategories />
         <Footer />
       </main>
     </>
