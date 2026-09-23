@@ -2,6 +2,7 @@ import Footer from "@/components/common/footer";
 import FeaturedSection from "@/components/homeAuth/featuredSection";
 import Head from "next/head";
 import NewestCategory from "@/components/homeAuth/newestCategory";
+import FavoritesCourses from "@/components/homeAuth/favoriteCtegory";
 const HomeAuth = function () {
   return (
     <>
@@ -12,6 +13,7 @@ const HomeAuth = function () {
       <main>
         <FeaturedSection />
         <NewestCategory />
+        <FavoritesCourses />
         <Footer />
       </main>
     </>
