@@ -4,7 +4,6 @@ import { Button, Container, Col, Row } from "reactstrap";
 import UserForm from "@/components/profile/user";
 import HeaderAuth from "@/components/common/headerAuth";
 import Footer from "@/components/common/footer";
-
 const UserInfo = function () {
   return (
     <>

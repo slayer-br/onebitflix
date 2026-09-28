@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { Container, Form, FormGroup, Button, Input } from "reactstrap";
+import { Container, Form, Input } from "reactstrap";
 import styles from "./styles.module.scss";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import profileService from "@/services/profileService";
 
 Modal.setAppElement("#__next");
 const HeaderAuth = function () {
@@ -24,6 +25,16 @@ const HeaderAuth = function () {
     router.push("/");
   };
 
+  const [initials, setInitials] = useState("");
+
+  useEffect(() => {
+    profileService.fetchCurrent().then((user) => {
+      const firstNameInitial = user.firstName.slice(0, 1);
+      const lastNameInitial = user.lastName.slice(0, 1);
+      setInitials(firstNameInitial + lastNameInitial);
+    });
+  }, []);
+
   return (
     <>
       <Container className={styles.nav}>
@@ -36,7 +47,7 @@ const HeaderAuth = function () {
           </Form>
           <img src="/homeAuth/iconSearch.svg" alt="lupaHeader" className={styles.searchImg} />
           <p className={styles.userProfile} onClick={handleOpenModal}>
-            AB
+            {initials}
           </p>
         </div>
         <Modal
