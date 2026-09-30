@@ -1,7 +1,7 @@
 import HeaderGeneric from "@/components/common/headerGeneric";
 import styles from "../styles/registerLogin.module.scss";
 import Head from "next/head";
-import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, Container, Form, FormGroup, Input, Label,  } from "reactstrap";
 import Footer from "@/components/common/footer";
 import { SyntheticEvent, useEffect, useState } from "react";
 import authService from "@/services/authService";
