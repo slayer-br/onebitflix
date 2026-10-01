@@ -123,7 +123,7 @@ const CoursePage = function () {
               : null}
           </p>
           {course.episodes?.length ? (
-            course.episodes.map((episode) => <EpisodeList key={episode.id} episode={episode} />)
+            course.episodes.map((episode) => <EpisodeList key={episode.id} episode={episode} course={course} />)
           ) : (
             <p>
               <strong>Curso sem episódios, Retorne mais tarde! &#x1F606;&#x1F918;</strong>
