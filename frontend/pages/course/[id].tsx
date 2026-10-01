@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Button, Container } from "reactstrap";
 import PageSpinner from "@/components/common/spinner";
 import EpisodeList from "@/components/common/episodeList";
+import Footer from "@/components/common/footer";
 
 const CoursePage = function () {
   const [course, setCourse] = useState<CourseType>();
@@ -65,8 +66,7 @@ const CoursePage = function () {
       <main>
         <div
           style={{
-            backgroundImage: `linear-gradient(to bottom, #6666661a, #151515),
-	          url(${process.env.NEXT_PUBLIC_BASEURL}/${course?.thumbnailUrl})`,
+            backgroundImage: `linear-gradient(to bottom, #6666661a, #151515), url(${process.env.NEXT_PUBLIC_BASEURL}/${course?.thumbnailUrl})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             minHeight: "550px",
@@ -77,7 +77,7 @@ const CoursePage = function () {
         <Container className={styles.courseInfo}>
           <p className={styles.courseTitle}>{course?.name}</p>
           <p className={styles.courseDescription}>{course?.synopsis}</p>
-          <Button outline className={styles.courseBtn}>
+          <Button outline className={styles.courseBtn} disabled={course?.episodes?.length === 0 ? true : false}>
             Assistir agora!
             <img src="/buttonPlay.svg" alt="buttonImg" className={styles.buttonImg} />
           </Button>
@@ -120,10 +120,17 @@ const CoursePage = function () {
           <p className={styles.episodeLength}>
             {course.episodes?.length
               ? `${course.episodes.length} ${course.episodes.length === 1 ? "episódio" : "episódios"}`
-              : "Curso sem episódios"}
+              : null}
           </p>
-          {course?.episodes && course?.episodes.map((episode) => <EpisodeList key={episode.id} episode={episode} />)}
+          {course.episodes?.length ? (
+            course.episodes.map((episode) => <EpisodeList key={episode.id} episode={episode} />)
+          ) : (
+            <p>
+              <strong>Curso sem episódios, Retorne mais tarde! &#x1F606;&#x1F918;</strong>
+            </p>
+          )}
         </Container>
+        <Footer />
       </main>
     </>
   );
