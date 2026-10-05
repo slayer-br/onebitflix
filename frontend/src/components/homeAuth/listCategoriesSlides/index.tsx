@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import categoriesService from "@/services/categoriesServices";
+import categoriesService from "@/services/categoriesService";
 import PageSpinner from "@/components/common/spinner";
 import SlideComponent from "@/components/common/slideComponent";
 import styles from "../../../../styles/slideCategory.module.scss";

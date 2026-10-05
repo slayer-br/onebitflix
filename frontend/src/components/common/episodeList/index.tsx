@@ -10,7 +10,7 @@ const EpisodeList = function ({ episode, course }: props) {
   const router = useRouter();
   
   const handleEpisodePlayer = () => {
-    router.push(`/course/episode/${episode.order - 1}?courseId=${course.id}`);
+    router.push(`/course/episode/${episode.order - 1}?courseId=${course.id}&episodeId=${episode.id}`);
   }
 
   const handleSecondsToMin = (totalSeconds: number) => {
