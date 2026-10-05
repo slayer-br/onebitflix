@@ -8,7 +8,7 @@ import PageSpinner from "@/components/common/spinner";
 import { Container, Button } from "reactstrap";
 import dynamic from "next/dynamic";
 import watchEpisodeService from "@/services/episodeService";
-import type ReactPlayerInstance from "react-player";
+import { convertCustomRouteSource } from "next/dist/server/lib/router-utils/route-types-utils";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
@@ -25,7 +25,7 @@ const EpisodePlayer = function () {
   const [getEpisodeTime, setGetEpisodeTime] = useState(0);
   const [episodeTime, setEpisodeTime] = useState(0);
 
-  const playerRef = useRef<ReactPlayerInstance | null>(null);
+  const playerRef = useRef<ReactPlayer>(null);
 
   const handleGetEpisodeTime = async () => {
     const res = await watchEpisodeService.getWatchTime(episodeId);
@@ -103,17 +103,7 @@ const EpisodePlayer = function () {
         <Container className="d-flex flex-column align-items-center gap-3 pt-5">
           <p className={styles.episodeTitle}>{episode?.name}</p>
 
-          {streamUrl && (
-            <ReactPlayer
-              url={streamUrl}
-              controls={true}
-              onReady={(player) => {
-                playerRef.current = player;
-              }}
-              onStart={handlePlayerTime}
-              onProgress={(progress) => setEpisodeTime(progress.playedSeconds)}
-            />
-          )}
+          {streamUrl && <ReactPlayer url={streamUrl} controls={true} ref={playerRef} onStart={handlePlayerTime} onProgress={(progress)=> setEpisodeTime(progress.playedSeconds)} />}
           <div className={styles.episodeButtonDiv}>
             <Button
               className={styles.episodeButton}
