@@ -61,7 +61,7 @@ const HeaderAuth = function () {
               placeholder="Pesquisar..."
               className={styles.input}
               value={searchName}
-              onChange={(event) => {
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setSearchName(event.currentTarget.value.toLowerCase());
               }}
             />
@@ -69,7 +69,6 @@ const HeaderAuth = function () {
           <img
             src="/homeAuth/iconSearch.svg"
             alt="lupaHeader"
-            className={styles.searchImg}
             className={styles.searchImg}
             onClick={handleSearchClick}
           />

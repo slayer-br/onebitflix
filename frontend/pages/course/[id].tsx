@@ -68,6 +68,13 @@ const CoursePage = function () {
     }
   };
 
+  const handleWatchCourse = () => {
+    if (!course?.episodes?.length) return;
+
+    const firstEpisode = course.episodes[0];
+    router.push(`/course/episode/${firstEpisode.order - 1}?courseId=${course.id}&episodeId=${firstEpisode.id}`);
+  };
+
   if (course === undefined) return <PageSpinner />;
 
   return (
@@ -90,7 +97,12 @@ const CoursePage = function () {
         <Container className={styles.courseInfo}>
           <p className={styles.courseTitle}>{course?.name}</p>
           <p className={styles.courseDescription}>{course?.synopsis}</p>
-          <Button outline className={styles.courseBtn} disabled={course?.episodes?.length === 0 ? true : false}>
+          <Button
+            outline
+            className={styles.courseBtn}
+            disabled={course?.episodes?.length === 0 ? true : false}
+            onClick={handleWatchCourse}
+          >
             Assistir agora!
             <img src="/buttonPlay.svg" alt="buttonImg" className={styles.buttonImg} />
           </Button>

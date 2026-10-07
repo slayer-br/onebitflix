@@ -29,13 +29,17 @@ const EpisodePlayer = function () {
   const playerRef = useRef<ReactPlayerInstance | null>(null);
 
   const handleGetEpisodeTime = async () => {
+    if (!episodeId || Number.isNaN(episodeId)) return;
+
     const res = await watchEpisodeService.getWatchTime(episodeId);
     if (res?.data !== null) {
-      setGetEpisodeTime(res.data.seconds);
+      setGetEpisodeTime(Number(res.data?.seconds ?? 0));
     }
   };
 
   const handleSetEpisodeTime = async () => {
+    if (!episodeId || Number.isNaN(episodeId)) return;
+
     await watchEpisodeService.setWatchTime({ episodeId, seconds: Math.round(episodeTime) });
   };
 
@@ -90,17 +94,40 @@ const EpisodePlayer = function () {
       : undefined;
 
   const handleLastEpisode = () => {
-    if (course) router.push(`/course/episode/${episodeOrder - 1}?courseId=${course.id}&episodeId=${episode?.id - 1}`);
+    if (!course || !course.episodes) return;
+
+    const previousEpisode = course.episodes[episodeOrder - 1];
+    const previousEpisodeId = previousEpisode?.id;
+
+    if (typeof previousEpisodeId === "number") {
+      router.push(`/course/episode/${episodeOrder - 1}?courseId=${course.id}&episodeId=${previousEpisodeId}`);
+    }
   };
 
   const handleNextEpisode = () => {
-    if (course) router.push(`/course/episode/${episodeOrder + 1}?courseId=${course.id}&episodeId=${episode?.id + 1}`);
+    if (!course || !course.episodes) return;
+
+    const nextEpisode = course.episodes[episodeOrder + 1];
+    const nextEpisodeId = nextEpisode?.id;
+
+    if (typeof nextEpisodeId === "number") {
+      router.push(`/course/episode/${episodeOrder + 1}?courseId=${course.id}&episodeId=${nextEpisodeId}`);
+    }
   };
 
   if (!course) return <PageSpinner />;
 
-  if (episodeOrder + 1 < course?.episodes?.length) {
-    if (Math.round(episodeTime) === course.episodes[episodeOrder].secondsLong) {
+  const episodesLength = course.episodes?.length ?? 0;
+  const currentEpisode = course.episodes?.[episodeOrder];
+  const hasValidCurrentEpisode =
+    Number.isFinite(episodeOrder) &&
+    Array.isArray(course.episodes) &&
+    episodeOrder >= 0 &&
+    episodeOrder < episodesLength &&
+    !!currentEpisode;
+
+  if (hasValidCurrentEpisode && episodeOrder + 1 < episodesLength) {
+    if (Math.round(episodeTime) >= (currentEpisode?.secondsLong ?? 0)) {
       handleNextEpisode();
     }
   }
@@ -137,7 +164,7 @@ const EpisodePlayer = function () {
             </Button>
             <Button
               className={styles.episodeButton}
-              disabled={episodeOrder + 1 === (course.episodes?.length || 0)}
+              disabled={episodeOrder + 1 === episodesLength}
               onClick={handleNextEpisode}
             >
               <img src="/episode/iconArrowRight.svg" alt="setaDireita" className={styles.arrowImg} />

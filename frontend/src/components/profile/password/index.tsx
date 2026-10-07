@@ -79,7 +79,7 @@ const PasswordForm = function () {
               required
               maxLength={12}
               value={currentPassword}
-              onChange={(event) => {
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setCurrentPassword(event.currentTarget.value);
               }}
               className={styles.input}
@@ -98,7 +98,7 @@ const PasswordForm = function () {
               placeholder="******"
               required
               value={newPassword}
-              onChange={(event) => {
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setNewPassword(event.currentTarget.value);
               }}
               className={styles.inputFlex}
@@ -115,7 +115,7 @@ const PasswordForm = function () {
               placeholder="******"
               required
               value={confirmPassword}
-              onChange={(event) => {
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setConfirmPassword(event.currentTarget.value);
               }}
               className={styles.inputFlex}

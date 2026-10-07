@@ -82,7 +82,7 @@ const UserForm = function () {
               maxLength={20}
               className={styles.inputFlex}
               value={firstName}
-              onChange={(event) => {
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setFirstName(event.target.value);
               }}
             />
@@ -100,7 +100,7 @@ const UserForm = function () {
               maxLength={20}
               className={styles.inputFlex}
               value={lastName}
-              onChange={(event) => {
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setLastName(event.target.value);
               }}
             />
@@ -119,7 +119,7 @@ const UserForm = function () {
               required
               className={styles.input}
               value={phone}
-              onChange={(event) => {
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setPhone(event.target.value);
               }}
             />
@@ -136,7 +136,7 @@ const UserForm = function () {
               required
               className={styles.input}
               value={email}
-              onChange={(event) => {
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setEmail(event.target.value);
               }}
             />
