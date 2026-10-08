@@ -1,4 +1,3 @@
-import path from "path";
 import uploadFileFeature from "@adminjs/upload";
 import { ResourceOptions, FeatureType } from "adminjs";
 
@@ -13,8 +12,12 @@ export const episodeResourceOptions: ResourceOptions = {
 export const episodeResourceFeatures: FeatureType[] = [
   uploadFileFeature({
     provider: {
-      local: {
-        bucket: path.join(__dirname, "../../../uploads"),
+      aws: {
+        bucket: process.env.SUPABASE_BUCKET_NAME || "",
+        region: process.env.SUPABASE_REGION || "",
+        accessKeyId: process.env.SUPABASE_ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.SUPABASE_SECRET_ACCESS_KEY || "",
+        endpoint: process.env.SUPABASE_S3_ENDPOINT || "",
       },
     },
     properties: {
