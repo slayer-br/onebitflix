@@ -18,7 +18,7 @@ export const episodeResourceFeatures: FeatureType[] = [
         accessKeyId: process.env.SUPABASE_ACCESS_KEY_ID || "",
         secretAccessKey: process.env.SUPABASE_SECRET_ACCESS_KEY || "",
         endpoint: process.env.SUPABASE_S3_ENDPOINT || "",
-      },
+      } as unknown as any,
     },
     properties: {
       key: "videoUrl",
