@@ -27,3 +27,5 @@ yarn-error.log*
 
 # Build / Cache do AdminJS
 .adminjs/
+
+.tmp/
